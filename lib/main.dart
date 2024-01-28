@@ -1,4 +1,3 @@
-import 'package:currencyconverter/basics.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,6 +12,15 @@ class MathMaker extends StatefulWidget {
 }
 
 class _MathMakerState extends State<MathMaker> {
+  String data = 'Initial Data'; // state is here
+  int firstOperator = 0;
+  int secondOperator = 0;
+  void test() {
+    setState(() {
+      data = 'BLAH';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,25 +30,80 @@ class _MathMakerState extends State<MathMaker> {
             backgroundColor: Colors.blueGrey, title: const Text('Do math')),
         body: Column(
           children: [
-            Container(
-              color: Colors.green,
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(10),
-              height: 50,
-              width: 50,
-              child: const Text('1'), //Selector number 1
-            ),
-            Container(
-              color: Colors.green,
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(10),
-              height: 50,
-              width: 50,
-              child: const Text('2'), // selector number 2
-            ),
-            const Column(
+            Row(
               children: [
-                Text('buttons go here'),
+                Container(
+                  color: Colors.green,
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
+                  height: 100,
+                  width: 100,
+                  child: Text(data), //Selector number 1
+                ),
+                Container(
+                  color: Colors.green,
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
+                  height: 100,
+                  width: 100,
+                  child: const Text('Selector number 2'), // selector number 2
+                )
+              ],
+            ),
+            const Wrap(
+              alignment: WrapAlignment
+                  .start, // Align children to the start of each line
+              children: [
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('1'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('2'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('3'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('4'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('5'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('6'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('7'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('8'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('9'),
+                )),
+                Card(
+                    child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('0'),
+                ))
               ],
             ),
             const Row(
@@ -69,8 +132,8 @@ class _MathMakerState extends State<MathMaker> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add), onPressed: () {}),
+        floatingActionButton: const FloatingActionButton(
+            onPressed: null, child: Icon(Icons.people_outline)),
       ),
     );
   }
