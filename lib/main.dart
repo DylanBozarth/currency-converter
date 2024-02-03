@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,18 +12,46 @@ class MathMaker extends StatefulWidget {
 }
 
 class _MathMakerState extends State<MathMaker> {
-  String data = 'Initial Data'; // state is here
-  int firstOperator = 0;
-  int secondOperator = 0;
-  void test() {
-    setState(() {
-      data = 'BLAH';
-    });
-  }
+  int? firstOperator;
+  int? secondOperator;
+  bool operatorSwitch = false;
 
   void setFirstOperator(int newValue) {
     setState(() {
       firstOperator = newValue; // Set the value of myNumber to the argument
+    });
+  }
+
+  void setSecondOperator(int newValue) {
+    setState(() {
+      secondOperator = newValue; // Set the value of myNumber to the argument
+    });
+  }
+
+  void determineOperator(int newValue) {
+    if (operatorSwitch = true) {
+      setFirstOperator(newValue);
+    } else {
+      setSecondOperator(newValue);
+    }
+  }
+
+  void changeOperator() {
+    print(operatorSwitch);
+    setState(() {
+      operatorSwitch = false;
+    });
+  }
+
+  void clearAll() {
+    setState(() {
+      operatorSwitch = false;
+    });
+    setState(() {
+      firstOperator = null; // Set the value of myNumber to the argument
+    });
+    setState(() {
+      secondOperator = null; // Set the value of myNumber to the argument
     });
   }
 
@@ -54,87 +80,122 @@ class _MathMakerState extends State<MathMaker> {
                   padding: const EdgeInsets.all(10),
                   height: 100,
                   width: 100,
-                  child: const Text('Selector number 2'), // selector number 2
+                  child: Text('$secondOperator'), // selector number 2
                 )
               ],
             ),
-            const Wrap(
+            Wrap(
               alignment: WrapAlignment
                   .start, // Align children to the start of each line
               children: [
                 Card(
                     child: ElevatedButton(
-                  onPressed: setFirstOperator(1),
-                  child: Text('1'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(1);
+                  },
+                  child: const Text('1'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('2'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(2);
+                  },
+                  child: const Text('2'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('3'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(3);
+                  },
+                  child: const Text('3'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('4'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(4);
+                  },
+                  child: const Text('4'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('5'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(5);
+                  },
+                  child: const Text('5'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('6'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(6);
+                  },
+                  child: const Text('6'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('7'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(7);
+                  },
+                  child: const Text('7'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('8'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(8);
+                  },
+                  child: const Text('8'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('9'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(9);
+                  },
+                  child: const Text('9'),
                 )),
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('0'),
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    determineOperator(0);
+                  },
+                  child: const Text('0'),
                 ))
               ],
             ),
-            const Row(
+            Row(
               children: [
                 Center(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('+'),
+                  onPressed: changeOperator,
+                  child: const Text('+'),
                 )),
                 Center(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('-'),
+                  onPressed: changeOperator,
+                  child: const Text('-'),
                 )),
                 Center(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('X'),
+                  onPressed: changeOperator,
+                  child: const Text('X'),
                 )),
                 Center(
                     child: ElevatedButton(
-                  onPressed: null,
-                  child: Text('%'),
+                  onPressed: changeOperator,
+                  child: const Text('%'),
+                )),
+                Center(
+                    child: ElevatedButton(
+                  onPressed: clearAll,
+                  child: const Text('CLEAR'),
                 )),
               ],
             ),
