@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,6 +23,12 @@ class _MathMakerState extends State<MathMaker> {
     });
   }
 
+  void setFirstOperator(int newValue) {
+    setState(() {
+      firstOperator = newValue; // Set the value of myNumber to the argument
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,7 +46,7 @@ class _MathMakerState extends State<MathMaker> {
                   padding: const EdgeInsets.all(10),
                   height: 100,
                   width: 100,
-                  child: Text(data), //Selector number 1
+                  child: Text('$firstOperator'), //Selector number 1
                 ),
                 Container(
                   color: Colors.green,
@@ -56,7 +64,7 @@ class _MathMakerState extends State<MathMaker> {
               children: [
                 Card(
                     child: ElevatedButton(
-                  onPressed: null,
+                  onPressed: setFirstOperator(1),
                   child: Text('1'),
                 )),
                 Card(
