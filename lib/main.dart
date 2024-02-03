@@ -12,9 +12,11 @@ class MathMaker extends StatefulWidget {
 }
 
 class _MathMakerState extends State<MathMaker> {
-  int? firstOperator = 0;
-  int? secondOperator = 0;
+  int firstOperator = 0;
+  int secondOperator = 0;
   bool operatorSwitch = false;
+  String mathOperator = '';
+  int solution = 0;
 
   void setFirstOperator(int newValue) {
     setState(() {
@@ -50,22 +52,48 @@ class _MathMakerState extends State<MathMaker> {
     }
   }
 
-  void changeOperator() {
+  void changeOperator(String newOperand) {
     setState(() {
       operatorSwitch = false;
+    });
+    setState(() {
+      mathOperator = newOperand;
     });
   }
 
   void clearAll() {
     setState(() {
       operatorSwitch = true;
+      firstOperator = 0;
+      secondOperator = 0;
+      solution = 0;
     });
-    setState(() {
-      firstOperator = 0; // Set the value of myNumber to the argument
-    });
-    setState(() {
-      secondOperator = 0; // Set the value of myNumber to the argument
-    });
+  }
+
+  int doMath() {
+    switch (mathOperator) {
+      case 'X':
+        setState(() {
+          solution = firstOperator * secondOperator;
+        });
+        break;
+      case '%':
+        setState(() {
+          solution = firstOperator % secondOperator;
+        });
+        break;
+      case '+':
+        setState(() {
+          solution = firstOperator + secondOperator;
+        });
+        break;
+      case '-':
+        setState(() {
+          solution = firstOperator - secondOperator;
+        });
+        break;
+    }
+    return solution;
   }
 
   @override
@@ -94,6 +122,14 @@ class _MathMakerState extends State<MathMaker> {
                   height: 100,
                   width: 100,
                   child: Text('$secondOperator'), // selector number 2
+                ),
+                Container(
+                  color: Colors.green,
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
+                  height: 100,
+                  width: 100,
+                  child: Text('$solution'), // Solution
                 )
               ],
             ),
@@ -187,22 +223,34 @@ class _MathMakerState extends State<MathMaker> {
               children: [
                 Center(
                     child: ElevatedButton(
-                  onPressed: changeOperator,
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    changeOperator('+');
+                  },
                   child: const Text('+'),
                 )),
                 Center(
                     child: ElevatedButton(
-                  onPressed: changeOperator,
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    changeOperator('-');
+                  },
                   child: const Text('-'),
                 )),
                 Center(
                     child: ElevatedButton(
-                  onPressed: changeOperator,
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    changeOperator('X');
+                  },
                   child: const Text('X'),
                 )),
                 Center(
                     child: ElevatedButton(
-                  onPressed: changeOperator,
+                  onPressed: () {
+                    // Pass a value when the button is pressed
+                    changeOperator('%');
+                  },
                   child: const Text('%'),
                 )),
                 Center(
@@ -214,8 +262,8 @@ class _MathMakerState extends State<MathMaker> {
             ),
           ],
         ),
-        floatingActionButton: const FloatingActionButton(
-            onPressed: null, child: Icon(Icons.people_outline)),
+        floatingActionButton: FloatingActionButton(
+            onPressed: doMath, child: const Icon(Icons.numbers_sharp)),
       ),
     );
   }
