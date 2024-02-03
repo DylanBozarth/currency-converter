@@ -12,8 +12,8 @@ class MathMaker extends StatefulWidget {
 }
 
 class _MathMakerState extends State<MathMaker> {
-  int? firstOperator;
-  int? secondOperator;
+  int? firstOperator = 0;
+  int? secondOperator = 0;
   bool operatorSwitch = false;
 
   void setFirstOperator(int newValue) {
@@ -28,16 +28,29 @@ class _MathMakerState extends State<MathMaker> {
     });
   }
 
-  void determineOperator(int newValue) {
-    if (operatorSwitch = true) {
-      setFirstOperator(newValue);
+  void appendDigit(int digit) {
+    if (operatorSwitch == true) {
+      setState(() {
+        // Convert the current number to a string, concatenate the new digit, and convert it back to an integer
+        firstOperator = int.parse('$firstOperator$digit');
+      });
     } else {
-      setSecondOperator(newValue);
+      setState(() {
+        // Convert the current number to a string, concatenate the new digit, and convert it back to an integer
+        secondOperator = int.parse('$secondOperator$digit');
+      });
+    }
+  }
+
+  void determineOperator(int newValue) {
+    if (operatorSwitch == true) {
+      appendDigit(newValue);
+    } else {
+      appendDigit(newValue);
     }
   }
 
   void changeOperator() {
-    print(operatorSwitch);
     setState(() {
       operatorSwitch = false;
     });
@@ -45,13 +58,13 @@ class _MathMakerState extends State<MathMaker> {
 
   void clearAll() {
     setState(() {
-      operatorSwitch = false;
+      operatorSwitch = true;
     });
     setState(() {
-      firstOperator = null; // Set the value of myNumber to the argument
+      firstOperator = 0; // Set the value of myNumber to the argument
     });
     setState(() {
-      secondOperator = null; // Set the value of myNumber to the argument
+      secondOperator = 0; // Set the value of myNumber to the argument
     });
   }
 
